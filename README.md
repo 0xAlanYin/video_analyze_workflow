@@ -36,6 +36,15 @@ pip install -r requirements.txt
 4. 配置环境变量：
 复制 `.env.example` 到 `.env` 并修改配置
 
+必须的环境变量：
+```
+FLASK_APP=run.py
+FLASK_ENV=development
+SECRET_KEY=your-secret-key-here
+COZE_API_KEY=your-coze-api-key-here
+COZE_WORKFLOW_ID=your-coze-workflow-id-here
+```
+
 5. 运行应用：
 ```bash
 flask run
@@ -47,6 +56,18 @@ flask run
 2. 注册新账号或登录已有账号
 3. 在首页输入视频链接进行解析
 4. 查看解析结果
+
+## Coze API 配置
+
+1. 登录 [Coze 平台](https://www.coze.cn/)
+2. 创建一个新的工作流或使用现有工作流
+3. 获取 API 密钥：在个人设置中找到 API 密钥选项
+4. 获取工作流 ID：在工作流设置页面获取工作流 ID
+5. 将获取的密钥和 ID 填入 `.env` 文件中：
+   ```
+   COZE_API_KEY=your-coze-api-key-here
+   COZE_WORKFLOW_ID=your-coze-workflow-id-here
+   ```
 
 ## 技术栈
 

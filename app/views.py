@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 import requests
 import json
+import os
 from .forms import VideoAnalyzeForm
 
 main = Blueprint('main', __name__)
@@ -18,16 +19,24 @@ def index():
             return redirect(url_for('main.index'))
         
         try:
+            # 从环境变量获取API密钥和工作流ID
+            coze_api_key = os.getenv('COZE_API_KEY')
+            coze_workflow_id = os.getenv('COZE_WORKFLOW_ID')
+            
+            if not coze_api_key or not coze_workflow_id:
+                flash('未配置Coze API密钥或工作流ID，请检查.env文件')
+                return redirect(url_for('main.index'))
+            
             # 调用 Coze API
             headers = {
-                'Authorization': 'Bearer 替换为你的Coze API密钥',
+                'Authorization': f'Bearer {coze_api_key}',
                 'Content-Type': 'application/json'
             }
             data = {
                 'parameters': {
                     'input': form.url.data
                 },
-                'workflow_id': '替换为你的Coze API工作流ID'
+                'workflow_id': coze_workflow_id
             }
             response = requests.post(
                 'https://api.coze.cn/v1/workflow/run',
