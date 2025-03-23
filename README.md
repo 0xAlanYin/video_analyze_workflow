@@ -77,3 +77,7 @@ flask run
 - Flask-WTF
 - Bootstrap 5
 - SQLite 
+
+## 支持的视频平台
+
+抖音/B站/快手
